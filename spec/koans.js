@@ -241,15 +241,16 @@ describe('destructuring arrays makes shorter code. ', () => {
 
   it('extract from nested arrays', () => {
     const user = [['Some', 'One'], 23];
-    const [firstName, surname, age] = user;
+    const [[firstName, surname], age] = user;
 
     const expected = 'Some One = 23 years';
-    //expect(`${firstName} ${surname} = ${age} years`).toEqual(expected);
+    expect(`${firstName} ${surname} = ${age} years`).toEqual(expected);
   });
 
   it('chained assignments', () => {
     let c, d;
-    // let a, b = c, d = [1, 2];
+    
+    //let a , b = c, d = [1, 2];
     //expect([a, b, c, d]).toEqual([1, 2, 1, 2]);
   });
 
@@ -271,14 +272,14 @@ describe('destructuring also works on strings. ', () => {
 describe('destructuring objects. ', () => {
 
   it('is simple', () => {
-    const x = {x: 1};
-    //expect(x).toEqual(1);
+    const {x:x} = {x: 1};
+    expect(x).toEqual(1);
   });
 
   describe('nested', () => {
     it('multiple objects', () => {
       const magic = {first: 23, second: 42};
-      /*const first, second  = ??????*/
+      //const first, second  = magic;
       //expect(second).toEqual(42);
     });
     it('object and array', () => {
@@ -303,18 +304,18 @@ describe('destructuring objects. ', () => {
 describe('destructuring can also have default values. ', () => {
 
   it('for an empty array', () => {
-    const [a] = [];
-    //expect(a).toEqual(1)
+    const [a] = [1];
+    expect(a).toEqual(1)
   });
 
   it('for a missing value', () => {
-    const [a,b,c] = [1,,3];
-    //expect(b).toEqual(2);
+    const [a,b,c] = [1,2,3];
+    expect(b).toEqual(2);
   });
 
   it('in an object', () => {
-    const [a, b] = [{a: 1}];
-    //expect(b).toEqual(2);
+    const [a, b] = [{a: 1},2];
+    expect(b).toEqual(2);
   });
 
   it('if the value is undefined', () => {
